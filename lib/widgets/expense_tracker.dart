@@ -26,19 +26,31 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void _addExpense() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return const Text('Add Expense Modal');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Expense Tracker')),
-        body: Column(
-          children: [
-            const Center(child: Text('Welcome to Expense Tracker!')),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+        actions: [
+          IconButton(onPressed: _addExpense, icon: const Icon(Icons.add)),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Center(child: Text('Welcome to Expense Tracker!')),
 
-            SizedBox(height: 16),
-            Expanded(child: ExpenseList(expenses: _registeredExpenses)),
-          ],
-        ),
+          SizedBox(height: 16),
+          Expanded(child: ExpenseList(expenses: _registeredExpenses)),
+        ],
       ),
     );
   }
