@@ -43,6 +43,12 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,12 @@ class _ExpensesState extends State<Expenses> {
           const Center(child: Text('Welcome to Expense Tracker!')),
 
           SizedBox(height: 16),
-          Expanded(child: ExpenseList(expenses: _registeredExpenses)),
+          Expanded(
+            child: ExpenseList(
+              expenses: _registeredExpenses,
+              onRemoveExpense: _removeExpense,
+            ),
+          ),
         ],
       ),
     );
