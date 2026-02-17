@@ -27,13 +27,19 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
-  void _addExpense() {
+  void _openModelSheet() {
     showModalBottomSheet(
       context: context,
       builder: (ctx) {
-        return const NewExpense();
+        return NewExpense(onAddExpense: _addExpense);
       },
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
@@ -42,7 +48,7 @@ class _ExpensesState extends State<Expenses> {
       appBar: AppBar(
         title: const Text('Expense Tracker'),
         actions: [
-          IconButton(onPressed: _addExpense, icon: const Icon(Icons.add)),
+          IconButton(onPressed: _openModelSheet, icon: const Icon(Icons.add)),
         ],
       ),
       body: Column(
